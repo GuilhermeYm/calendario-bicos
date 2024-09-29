@@ -2,10 +2,14 @@
 
 import React from "react";
 import "./style/MainComponentStyle.css";
-import { SlCalender } from "react-icons/sl";
-import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
 import { useEffect, useState } from "react";
 import useDays from "../hooks/useDays";
+// Calendário FullCalender
+import FullCalender from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin, { Draggable, DropArg }from "@fullcalendar/interaction";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import ptBrLocale from "@fullcalendar/core/locales/pt-br";
 
 const MainComponent = () => {
   const { days, totalDays } = useDays();
@@ -45,31 +49,12 @@ const MainComponent = () => {
     }
   }
 
-  const generateWeeks = () => { 
-    const weeks = [];
-    const days = totalDaysMain;
-    let week = [];
-    let count = 0;
-
-    for (let i = 0; i < days.length; i++) {
-      week.push(days[i]);
-      count++;
-      if (count === 7) {
-        weeks.push(week);
-        week = [];
-        count = 0;
-      }
-    }
-
-    console.log(weeks);
-  }
 
   useEffect(() => {
     setDay(days.dia);
     setMonth(indentifyMonth(days.mes));
     setYear(days.ano);
     setTotalDaysMain(totalDays);
-    generateWeeks();
   }, [days]);
 
   return (
@@ -77,25 +62,25 @@ const MainComponent = () => {
       <h1 className="titleMainContainer">
         👋 Olá, bem-vindo ao caléndario Bicos
       </h1>
-      {/* Template do calendário*/}
-      <article className="articleContainer">
-        <section className="miscellaneousMainContainer">
-          <button className="lastMonth buttonMain">
-            <GrFormPreviousLink />
-          </button>
-          <h2 className="nameMonth">
-            <SlCalender />
-            <div className="nameMonth-space">{month}</div>
-            <div className="styleMonth">
-                <i className="inline-block">de</i>
-                <p className="inline-block">{year}</p>
-            </div>
-          </h2>
-          <button className="nextMonth buttonMain">
-            <GrFormNextLink />
-          </button>
-        </section>
-        <section className="containerDays">
+      {/* Template do calendário.
+      Vou usar uma biblioteca
+      */}
+       <article className="articleContainer">
+        <FullCalender plugins={
+          [
+            dayGridPlugin,
+            interactionPlugin,
+            timeGridPlugin,
+          ]
+        }
+        locale={ptBrLocale}
+        headerToolbar={{ 
+          left:"prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
+        }}
+        /> 
+        {/* <section className="containerDays">
           <div className="dom">
             <h2 className="dayOfTheWeek">Domingo</h2>
             <div className="dayCounterContainer">
@@ -126,8 +111,9 @@ const MainComponent = () => {
             <h2 className="dayOfTheWeek">Sábado</h2>
             <p className="dayCounter">7</p>
           </div>
-        </section>
-      </article>
+        </section> */}
+      </article> 
+      
     </>
   );
 };

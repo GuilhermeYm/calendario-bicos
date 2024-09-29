@@ -45,6 +45,7 @@ const useDays = () => {
       };
       setTotalDaysFunction(days.ano, days.mes);
     }
+    
   }, [month]);
 
   return {

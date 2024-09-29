@@ -45,11 +45,31 @@ const MainComponent = () => {
     }
   }
 
+  const generateWeeks = () => { 
+    const weeks = [];
+    const days = totalDaysMain;
+    let week = [];
+    let count = 0;
+
+    for (let i = 0; i < days.length; i++) {
+      week.push(days[i]);
+      count++;
+      if (count === 7) {
+        weeks.push(week);
+        week = [];
+        count = 0;
+      }
+    }
+
+    console.log(weeks);
+  }
+
   useEffect(() => {
     setDay(days.dia);
     setMonth(indentifyMonth(days.mes));
     setYear(days.ano);
     setTotalDaysMain(totalDays);
+    generateWeeks();
   }, [days]);
 
   return (

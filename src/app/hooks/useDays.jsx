@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 const useDays = () => {
   const [days, setDaysState] = useState({});
   const [totalDays, setTotalDays] = useState(0);
+  const [month, setMonth] = useState(0);
 
   useEffect(() => {
     // Função para retornar a data atual
@@ -19,6 +20,8 @@ const useDays = () => {
         ano: year,
       });
     };
+    // Setando o mês para funções futuras
+    setMonth(days.mes);
     // Chamar a função
     setDays();
   }, []); // Executa só uma vez
@@ -31,22 +34,18 @@ const useDays = () => {
       };
       //Função para retornar a quantidade de dias no mês
       const setTotalDaysFunction = (year, month) => {
-        console.log('Ano e mês recebido:', year, month);
+        console.log("Ano e mês recebido:", year, month);
         const daysInaMaht = getDayInMonth(year, month);
-        console.log('Quantidade de dias:', daysInaMaht);
+        console.log("Quantidade de dias:", daysInaMaht);
 
         //Criar um array
         const daysArray = Array.from({ length: daysInaMaht }, (_, i) => i + 1);
         console.log(daysArray);
         setTotalDays(daysArray);
       };
-      setTotalDaysFunction(days.ano, days.mes); 
+      setTotalDaysFunction(days.ano, days.mes);
     }
-  }, [days]);
-
-//   const getFirstSevenDays = () => { 
-//     if (days.)
-//   }
+  }, [month]);
 
   return {
     days,

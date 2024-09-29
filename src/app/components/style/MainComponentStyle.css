@@ -1,0 +1,57 @@
+@import url("../../globals.css");
+
+.titleMainContainer {
+  text-align: center;
+}
+
+.articleContainer {
+  display: flex;
+  height: 30%;
+  flex-direction: column;
+  width: 50%;
+  background-color: #212121;
+  margin: 2em auto 0 ;
+  padding: 1rem;
+}
+
+.miscellaneousMainContainer { 
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nameMonth-space {
+  display: inline-block;
+  margin-left: 0.5em;
+}
+
+.dayOfTheWeek {
+    font-size: 1.5em;
+}
+
+.containerDays { 
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.buttonMain {
+    width: 1em;
+    font-size: 3em;
+    height: 1em;
+    text-align: center;
+    border: none;
+    outline: none;
+    background-color: #474747;
+    color: #fff;
+    border-radius: .5em;
+}
+
+.dayCounterContainer { 
+    border: 1px solid #474747;
+    width: 10em;
+    border-radius: .5em;
+    padding: .5em .3em;
+    text-align: center;
+}
